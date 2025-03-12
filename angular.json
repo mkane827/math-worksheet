@@ -32,14 +32,10 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -96,6 +92,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -103,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f0410705-18bf-4a9c-85bc-9cec17dcb742"
   }
 }

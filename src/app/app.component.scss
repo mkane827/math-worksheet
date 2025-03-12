@@ -1,0 +1,29 @@
+:host {
+  padding: 16px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.container {
+  --mat-checkbox-label-text-size: var(--fontsize);
+  --mat-checkbox-label-text-line-height: var(--fontsize);
+}
+
+.header {
+  padding-bottom: 16px;
+  border-bottom: solid 1px white;
+  margin-bottom: 16px;
+
+  button {
+    margin-right: 16px;
+  }
+}
+
+.checkbox-cell {
+  padding-right: 16px;
+  vertical-align: top;
+}
+
+mat-form-field {
+  font-size: var(--fontsize);
+}

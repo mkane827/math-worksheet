@@ -1,0 +1,22 @@
+.problem {
+  $margin: calc(var(--fontsize) * 1.5);
+  display: inline-block;
+  font-size: var(--fontsize);
+  margin: $margin $margin $margin 0;
+
+  span {
+    display: inline-block;
+    text-align: center;
+    width: calc(var(--fontsize) * 1.7);
+  }
+}
+
+.answer {
+  font-size: var(--fontsize);
+  background: none;
+  border: none;
+  border-bottom: solid 1px white;
+  outline: none;
+  width: calc(var(--fontsize) * 2.5);
+  color: white;
+}
