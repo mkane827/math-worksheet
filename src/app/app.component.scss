@@ -14,6 +14,12 @@
   border-bottom: solid 1px white;
   margin-bottom: 16px;
 
+  @media print {
+    & {
+      display: none;
+    }
+  }
+
   button {
     margin-right: 16px;
   }

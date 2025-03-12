@@ -110,10 +110,10 @@ export class AppComponent {
 
     this.maxPerOperation = computed(() => {
       return {
-        [OPERATION.ADDITION]: this.maxAddition() + 1,
-        [OPERATION.SUBTRACTION]: this.maxSubtraction() + 1,
-        [OPERATION.MULTIPLICATION]: this.maxMultiplication() + 1,
-        [OPERATION.DIVISION]: this.maxDivision() + 1,
+        [OPERATION.ADDITION]: this.maxAddition(),
+        [OPERATION.SUBTRACTION]: this.maxSubtraction(),
+        [OPERATION.MULTIPLICATION]: this.maxMultiplication(),
+        [OPERATION.DIVISION]: this.maxDivision(),
       };
     });
   }
@@ -130,9 +130,11 @@ export class AppComponent {
           Math.floor(Math.random() * 100) % this.operations().length
         ];
       const x =
-        Math.floor(Math.random() * 100) % this.maxPerOperation()[operation];
+        (Math.floor(Math.random() * 100) % this.maxPerOperation()[operation]) +
+        1;
       const y =
-        Math.floor(Math.random() * 100) % this.maxPerOperation()[operation];
+        (Math.floor(Math.random() * 100) % this.maxPerOperation()[operation]) +
+        1;
       problems.push({
         x: operation === OPERATION.DIVISION ? x * y : x,
         y,

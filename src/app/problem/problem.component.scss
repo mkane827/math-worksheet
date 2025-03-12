@@ -4,6 +4,12 @@
   font-size: var(--fontsize);
   margin: $margin $margin $margin 0;
 
+  @media print {
+    & {
+      color: black;
+    }
+  }
+
   span {
     display: inline-block;
     text-align: center;
@@ -19,4 +25,11 @@
   outline: none;
   width: calc(var(--fontsize) * 2.5);
   color: white;
+
+  @media print {
+    & {
+      border-color: black;
+      color: black;
+    }
+  }
 }
