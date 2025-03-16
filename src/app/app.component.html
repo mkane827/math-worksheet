@@ -18,8 +18,9 @@
       <input
         matInput
         type="number"
+        min="12"
         [value]="fontSize()"
-        (change)="changeFontSize($event)"
+        (input)="changeFontSize($event)"
       />
     </mat-form-field>
   </div>
@@ -30,8 +31,9 @@
     <input
       matInput
       type="number"
+      min="1"
       [value]="numProblems()"
-      (change)="setMaxValSignal($event, numProblems)"
+      (input)="setMaxValSignal($event, numProblems)"
     />
   </mat-form-field>
   <table class="settings">
@@ -52,8 +54,9 @@
           <input
             matInput
             type="number"
+            min="1"
             [value]="maxAddition()"
-            (change)="setMaxValSignal($event, maxAddition)"
+            (input)="setMaxValSignal($event, maxAddition)"
           />
         </mat-form-field>
         }
@@ -76,8 +79,9 @@
           <input
             matInput
             type="number"
+            min="1"
             [value]="maxSubtraction()"
-            (change)="setMaxValSignal($event, maxSubtraction)"
+            (input)="setMaxValSignal($event, maxSubtraction)"
           />
         </mat-form-field>
         }
@@ -100,8 +104,9 @@
           <input
             matInput
             type="number"
+            min="1"
             [value]="maxMultiplication()"
-            (change)="setMaxValSignal($event, maxMultiplication)"
+            (input)="setMaxValSignal($event, maxMultiplication)"
           />
         </mat-form-field>
         }
@@ -124,8 +129,9 @@
           <input
             matInput
             type="number"
+            min="1"
             [value]="maxDivision()"
-            (change)="setMaxValSignal($event, maxDivision)"
+            (input)="setMaxValSignal($event, maxDivision)"
           />
         </mat-form-field>
         }
@@ -135,8 +141,17 @@
   } @else {
   <div class="worksheet">
     @for(problem of problems(); track problem.track) {
-    <problem [problem]="problem"></problem>
+    <problem [problem]="problem" (hasCorrectSolution)="hasCorrectSolution($event, $index)"></problem>
     }
   </div>
   }
 </div>
+
+@if (gotThemAllRight()) {
+<div class="congratulations">
+  <div class="congratulations-content">
+    <h1>Congratulations!</h1>
+    <p>You got them all right!</p>
+  </div>
+</div>
+}

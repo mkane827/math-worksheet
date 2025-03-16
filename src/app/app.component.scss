@@ -33,3 +33,24 @@
 mat-form-field {
   font-size: var(--fontsize);
 }
+
+.congratulations {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmhoc2tva21kdnUxNmJ0cGc2eDM0aXU4eXcxOWxlZ295YWJzaDVxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VWRi8cdo8Sl9VVOdde/giphy.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.congratulations-content {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  color: white;
+}

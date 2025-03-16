@@ -14,7 +14,13 @@
     display: inline-block;
     text-align: center;
     width: calc(var(--fontsize) * 1.7);
+    height: var(--fontsize);
   }
+}
+
+.problem-content {
+  display: flex;
+  justify-content: center;
 }
 
 .answer {
@@ -32,4 +38,14 @@
       color: black;
     }
   }
+}
+
+.is-correct {
+  color: red;
+  width: calc(var(--fontsize) * 2);
+  font-weight: bold;
+}
+
+.correct {
+  color: green;
 }

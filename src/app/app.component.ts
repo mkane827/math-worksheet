@@ -4,6 +4,7 @@ import {
   signal,
   Signal,
   computed,
+  effect,
 } from '@angular/core';
 import {
   MatCheckboxChange,
@@ -29,6 +30,26 @@ function getSolution(x: number, y: number, operation: OPERATION): number {
       return x * y;
     case OPERATION.DIVISION:
       return x;
+  }
+}
+
+function getX(x: number, y: number, operation: OPERATION): number {
+  switch (operation) {
+    case OPERATION.SUBTRACTION:
+      return Math.max(x, y);
+    case OPERATION.DIVISION:
+      return x * y;
+    default:
+      return x;
+  }
+}
+
+function getY(x: number, y: number, operation: OPERATION): number {
+  switch (operation) {
+    case OPERATION.SUBTRACTION:
+      return Math.min(x, y);
+    default:
+      return y;
   }
 }
 
@@ -67,6 +88,8 @@ export class AppComponent {
     [OPERATION.MULTIPLICATION]: number;
     [OPERATION.DIVISION]: number;
   }>;
+  readonly areAnswersCorrect: WritableSignal<boolean[]>;
+  readonly gotThemAllRight: Signal<boolean>;
 
   constructor() {
     this.showSettings = signal(true);
@@ -81,6 +104,7 @@ export class AppComponent {
     this.maxDivision = signal(10);
     this.problems = signal([]);
     this.fontSize = signal(20);
+    this.areAnswersCorrect = signal([]);
 
     this.operations = computed(() => {
       const includeAddition = this.includeAddition();
@@ -116,6 +140,17 @@ export class AppComponent {
         [OPERATION.DIVISION]: this.maxDivision(),
       };
     });
+
+    this.gotThemAllRight = computed(() => {
+      const numProblems = this.numProblems();
+      const areAnswersCorrect = this.areAnswersCorrect();
+      for (let i = 0; i < numProblems; i++) {
+        if (!areAnswersCorrect[i]) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 
   customTrackBy(index: number, problem: Problem) {
@@ -129,30 +164,27 @@ export class AppComponent {
         this.operations()[
           Math.floor(Math.random() * 100) % this.operations().length
         ];
-      const x =
+      let x =
         (Math.floor(Math.random() * 100) % this.maxPerOperation()[operation]) +
         1;
-      const y =
+      let y =
         (Math.floor(Math.random() * 100) % this.maxPerOperation()[operation]) +
         1;
       problems.push({
-        x: operation === OPERATION.DIVISION ? x * y : x,
-        y,
+        x: getX(x, y, operation),
+        y: getY(x, y, operation),
         operation,
         solution: getSolution(x, y, operation),
         track: `${i}:${x}:${y}`,
       });
     }
     this.problems.set(problems);
+    this.areAnswersCorrect.set([]);
     this.showSettings.set(false);
   }
 
   handleShowSettings() {
     this.showSettings.set(true);
-  }
-
-  toggleAddition(event: MatCheckboxChange) {
-    console.log(event);
   }
 
   changeFontSize(event: Event) {
@@ -167,5 +199,11 @@ export class AppComponent {
     if (target instanceof HTMLInputElement) {
       maxValSignal.set(Number(target.value));
     }
+  }
+
+  hasCorrectSolution(isCorrect: boolean, index: number) {
+    const correctness = [...this.areAnswersCorrect()];
+    correctness[index] = isCorrect;
+    this.areAnswersCorrect.set(correctness);
   }
 }

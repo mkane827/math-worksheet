@@ -1,7 +1,20 @@
 <div class="problem">
-  <span>{{ problem().x }}</span>
-  <span>{{ problem().operation }}</span>
-  <span>{{ problem().y }}</span>
-  <span>=</span>
-  <input type="text" inputmode="numeric" pattern="\d*" class="answer" />
+  <div class="problem-content">
+    <span>{{ problem().x }}</span>
+    <span>{{ problem().operation }}</span>
+    <span>{{ problem().y }}</span>
+    <span>=</span>
+    <input
+      type="text"
+      inputmode="numeric"
+      pattern="\d*"
+      class="answer"
+      (input)="updateInputValue($event)"
+    />
+    <span class="is-correct">
+      @if(inputString()) {
+      <mat-icon [fontIcon]="isCorrectIcon()" [class.correct]="isCorrect()"></mat-icon>
+      }
+    </span>
+  </div>
 </div>
