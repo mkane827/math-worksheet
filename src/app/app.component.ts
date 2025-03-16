@@ -143,6 +143,10 @@ export class AppComponent {
 
     this.gotThemAllRight = computed(() => {
       const numProblems = this.numProblems();
+      const problems = this.problems();
+      if (problems.length === 0) {
+        return false;
+      }
       const areAnswersCorrect = this.areAnswersCorrect();
       for (let i = 0; i < numProblems; i++) {
         if (!areAnswersCorrect[i]) {
@@ -184,6 +188,8 @@ export class AppComponent {
   }
 
   handleShowSettings() {
+    this.problems.set([]);
+    this.areAnswersCorrect.set([]);
     this.showSettings.set(true);
   }
 
