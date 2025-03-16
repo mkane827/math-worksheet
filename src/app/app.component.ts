@@ -25,7 +25,7 @@ function getSolution(x: number, y: number, operation: OPERATION): number {
     case OPERATION.ADDITION:
       return x + y;
     case OPERATION.SUBTRACTION:
-      return x - y;
+      return Math.abs(x - y);
     case OPERATION.MULTIPLICATION:
       return x * y;
     case OPERATION.DIVISION:
